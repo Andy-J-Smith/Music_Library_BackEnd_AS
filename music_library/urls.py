@@ -20,5 +20,5 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('music/songs/', include('songs.urls')),
+    path('api/music/songs/', include('songs.urls')),
 ]
