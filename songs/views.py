@@ -24,11 +24,17 @@ def songs_list(request):
 
 
 
-@api_view(['GET'])
+@api_view(['GET', 'PUT', 'DELETE'])
 def songs_detail(request, pk):
-    try:
-        song = Song.objects.get(pk=pk)
-        serializer = SongSerializer(song)
+    song = get_object_or_404(Song, pk=pk)
+    if request.method == 'GET':
+        serializer = SongSerializer(Song)
         return Response(serializer.data, status=status.HTTP_200_OK)
-    except Song.DoesNotExist:
-        return Response (status=status.HTTP_404_NOT_FOUND)
+    elif request.method == 'PUT':
+        serializer = SongSerializer(song, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    elif request.method == 'DELETE':
+        song.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
