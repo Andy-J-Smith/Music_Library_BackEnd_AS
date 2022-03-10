@@ -8,12 +8,17 @@ from rest_framework import status
 
 from songs import serializers
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def songs_list(request):
-    songs = Song.objects.all()
-    serializer = SongSerializer(songs, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
-
+    if request.method == 'GET':
+        songs = Song.objects.all()
+        serializer = SongSerializer(songs, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    elif request.method == 'POST':
+        serializer = SongSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 @api_view(['GET'])
