@@ -46,5 +46,6 @@ def like_song(request, pk):
     like = get_object_or_404(Song, pk=pk)
     serializer = SongSerializer(like, data=request.data)
     serializer.is_valid(raise_exception=True)
+    like.liked += 1
     serializer.save()
     return Response(serializer.data, status=status.HTTP_201_CREATED)
