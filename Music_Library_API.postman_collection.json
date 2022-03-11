@@ -63,7 +63,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "\n    {        \"title\": \"Wasted On You\",\n        \"artist\": \"Morgan Wallen\",\n        \"album\": \"Dangerous-The Double Album\",\n        \"release_date\": \"2012-02-22\",\n        \"genre\": \"Country\"\n    }\n",
+					"raw": "\n    {        \"title\": \"865\",\n        \"artist\": \"Morgan Wallen\",\n        \"album\": \"Dangerous-The Double Album\",\n        \"release_date\": \"2012-02-22\",\n        \"genre\": \"Country\"\n    }\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -145,6 +145,41 @@
 						"music",
 						"songs",
 						"6",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Like_Song",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id\": 1,\n        \"title\": \"Hotel California\",\n        \"artist\": \"The Eagles\",\n        \"album\": \"Hotel California\",\n        \"release_date\": \"1977-02-22\",\n        \"genre\": \"Rock\",\n        \"liked\": 0\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/music/songs/3/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"music",
+						"songs",
+						"3",
 						""
 					]
 				}
