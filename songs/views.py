@@ -5,7 +5,6 @@ from .models import Song
 from .serializers import SongSerializer
 from django.shortcuts import get_object_or_404
 from rest_framework import status
-
 from songs import serializers
 
 @api_view(['GET', 'POST'])
@@ -40,3 +39,12 @@ def songs_detail(request, pk):
         return Response(status=status.HTTP_204_NO_CONTENT)
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['PUT'])
+def like_song(request, pk):
+    like = get_object_or_404(Song, pk=pk)
+    serializer = SongSerializer(like, data=request.data)
+    serializer.is_valid(raise_exception=True)
+    serializer.save()
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
